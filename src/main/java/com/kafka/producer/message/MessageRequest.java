@@ -1,6 +1,8 @@
-package com.kafka.producer;
+package com.kafka.producer.message;
 
-public class MessageRequest {
+import java.io.Serializable;
+
+public class MessageRequest implements Serializable {
 
     private String message;
 

@@ -1,4 +1,4 @@
-package com.kafka.producer;
+package com.kafka.producer.message;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/messages")
-public class MessageController {
+@RequestMapping("/api/v1")
+public class StandardRequestController {
 
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, MessageRequest> kafkaTemplate;
 
-    public MessageController(KafkaTemplate<String, String> kafkaTemplate) {
+    public StandardRequestController(KafkaTemplate<String, MessageRequest> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    @PostMapping
+    @PostMapping("standard-request")
     public void publish(@RequestBody MessageRequest request) {
-        kafkaTemplate.send("news", request.getMessage());
+        kafkaTemplate.send("standard-message", request);
     }
 
 }
